@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SignInFragment extends Fragment {
+public class FragmentSignIn extends Fragment {
     @BindView(R.id.edt_phone)
     EditText userPhoneNumber;
     @BindView(R.id.edt_password)
@@ -35,16 +35,14 @@ public class SignInFragment extends Fragment {
 
     private String mUserPhone;
     private String mUserPassword;
-    private OnSignUpButtonClicked onSignUpButtonClicked;
+private StartingActivity startingActivity;
 
-    public interface OnSignUpButtonClicked {
-        void openSignUpFragment();
+
+    public static FragmentSignIn newInstance() {
+        return new FragmentSignIn();
     }
 
-    public SignInFragment() {
-        // Required empty public constructor
-    }
-//    public SignInFragment(OnSignUpButtonClicked onSignUpButtonClicked) {
+//    public FragmentSignIn(OnSignUpButtonClicked onSignUpButtonClicked) {
 //        this.onSignUpButtonClicked = onSignUpButtonClicked;
 //    }
 
@@ -55,15 +53,20 @@ public class SignInFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
         ButterKnife.bind(this, view);
+initview();
 
+
+        return view;
+    }
+
+    private void initview() {
+        startingActivity=(StartingActivity)getActivity();
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onSignUpButtonClicked.openSignUpFragment();
+                startingActivity.DisplayFragmentSignUp();
             }
         });
-
-        return view;
     }
 
 
@@ -78,14 +81,6 @@ public class SignInFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        try {
-            this.onSignUpButtonClicked = (OnSignUpButtonClicked)context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException("Activity must implement OnSignUpButtonClicked Interface");
-        }
-    }
+
 
 }

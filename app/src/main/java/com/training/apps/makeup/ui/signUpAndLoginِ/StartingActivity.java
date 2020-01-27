@@ -1,20 +1,20 @@
 package com.training.apps.makeup.ui.signUpAndLoginِ;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.fragment.app.FragmentManager;
 
 import com.training.apps.makeup.R;
-import com.training.apps.makeup.ui.signUpAndLoginِ.SignInFragment.OnSignUpButtonClicked;
 
-public class StartingActivity extends AppCompatActivity implements OnSignUpButtonClicked {
+public class StartingActivity extends AppCompatActivity  {
 
     private FragmentManager fragmentManager;
-    private SignInFragment signInFragment;
-    private int count = 0;
+    private FragmentSignIn fragmentSignIn;
+
+    private FragmentSignUp fragment_sign_up;
+    private int fragment_count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,59 +23,47 @@ public class StartingActivity extends AppCompatActivity implements OnSignUpButto
 
 
         fragmentManager = getSupportFragmentManager();
-        signInFragment = new SignInFragment();
-
-        fragmentManager.beginTransaction()
-                .add(R.id.fragment_container, signInFragment, "sign_in")
-                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                .commit();
-
-    }
-
-
-    @Override
-    public void openSignUpFragment() {
-        count++;
-        fragmentManager.beginTransaction()
-                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                .hide(signInFragment)
-                .commit();
-
-        SignUpBaseFragment baseFragment = (SignUpBaseFragment) fragmentManager.findFragmentByTag("sign_up");
-        if (baseFragment != null) {
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                    .show(baseFragment)
-                    .commit();
+        if(savedInstanceState==null){
+        DisplayFragmentSignIn();}
+ }
+    public void DisplayFragmentSignIn() {
+        fragment_count += 1;
+        fragmentSignIn = FragmentSignIn.newInstance();
+        if (fragmentSignIn.isAdded()) {
+            fragmentManager.beginTransaction().show(fragmentSignIn).commit();
         } else {
-            baseFragment = new SignUpBaseFragment();
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                    .add(R.id.fragment_container, baseFragment, "sign_up")
-                    .commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_container, fragmentSignIn, "fragmentSignIn").addToBackStack("fragmentSignIn").commit();
         }
     }
 
+    public void DisplayFragmentSignUp() {
+        fragment_count += 1;
+        fragment_sign_up = FragmentSignUp.newInstance();
+        if (fragment_sign_up.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_sign_up).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_container, fragment_sign_up, "fragment_sign_up").addToBackStack("fragment_sign_up").commit();
+        }
+    }
     @Override
     public void onBackPressed() {
-        if (count > 0) {
-            SignUpBaseFragment baseFragment = (SignUpBaseFragment) fragmentManager.findFragmentByTag("sign_up");
-            if (baseFragment != null) {
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                        .hide(baseFragment)
-                        .commit();
+        Back();
+    }
+
+    public void Back() {
+
+            if (fragment_count >1) {
+                fragment_count -= 1;
+                super.onBackPressed();
+
+
+            } else  {
+
+                finish();
+
             }
-            SignInFragment signInFragment = (SignInFragment) fragmentManager.findFragmentByTag("sign_in");
-            if (signInFragment != null) {
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                        .show(signInFragment)
-                        .commit();
-            }
-            count--;
-        } else {
-            NavUtils.navigateUpFromSameTask(this);
-        }
+
+
+
     }
 }
