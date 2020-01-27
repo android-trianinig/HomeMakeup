@@ -35,7 +35,6 @@ public class StartingActivity extends AppCompatActivity implements OnSignUpButto
 
     @Override
     public void openSignUpFragment() {
-        Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
         count++;
         fragmentManager.beginTransaction()
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
