@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,15 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.imageview.ExperimentalImageView;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.shape.CornerFamily;
 import com.training.apps.makeup.R;
 import com.training.apps.makeup.model.MyProvider;
-import com.training.apps.makeup.model.MyService;
+import com.training.apps.makeup.ui.main.RoundedTopImageView;
 
 import java.util.List;
 
-public class ProviderRecycleAdapter extends RecyclerView.Adapter<ProviderRecycleAdapter.ServiceViewHolder> {
+public class ProviderRecycleAdapter extends RecyclerView.Adapter<ProviderRecycleAdapter.ProviderViewHolder> {
 
-    private List<MyProvider> myServices;
+    private List<MyProvider> myProviders;
     private Context mContext;
 
     public ProviderRecycleAdapter(Context context) {
@@ -28,44 +33,60 @@ public class ProviderRecycleAdapter extends RecyclerView.Adapter<ProviderRecycle
 
     @NonNull
     @Override
-    public ServiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    @ExperimentalImageView
+    public ProviderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext)
-                .inflate(R.layout.service_titles_list_item_layout, parent, false);
-        return new ServiceViewHolder(view);
+                .inflate(R.layout.service_provider_list_item_layout, parent, false);
+        return new ProviderViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
-        MyService service = myServices.get(position);
-        holder.serviceNameTxtView.setText(service.getServiceName());
-        if (position == 0) {
-            holder.serviceNameTxtView.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
-        }
+    @ExperimentalImageView
+    public void onBindViewHolder(@NonNull ProviderViewHolder holder, int position) {
+        MyProvider provider = myProviders.get(position);
+
+        holder.providerName.setText(provider.getProviderName());
+        holder.providerRate.setRating((float)provider.getProviderRate()*5/10);
+        holder.providerType.setText(provider.getProviderType());
+        holder.providerCity.setText(provider.getProviderCity());
+        holder.providerBanner.setImageResource(provider.getProviderImage());
     }
 
     @Override
     public int getItemCount() {
-        if (myServices != null && myServices.size() > 0) return myServices.size();
+        if (myProviders != null && myProviders.size() > 0) return myProviders.size();
         return 0;
     }
 
-    public void setMyServices(List<MyService> myServices) {
-        this.myServices = myServices;
+    public void setMyProviders(List<MyProvider> myProviders) {
+        this.myProviders = myProviders;
         notifyDataSetChanged();
     }
 
-    public class ServiceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView serviceNameTxtView;
+    public class ProviderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView providerName;
+        TextView providerType;
+        RatingBar providerRate;
+        TextView providerCity;
+        RoundedTopImageView providerBanner;
 
-        public ServiceViewHolder(@NonNull View itemView) {
+        @ExperimentalImageView
+        public ProviderViewHolder(@NonNull View itemView) {
             super(itemView);
-            serviceNameTxtView = itemView.findViewById(R.id.txt_service_name);
-            serviceNameTxtView.setOnClickListener(this);
+            providerName = itemView.findViewById(R.id.item_provider_name);
+            providerType = itemView.findViewById(R.id.item_provider_type);
+            providerRate = itemView.findViewById(R.id.item_provider_rate);
+            providerCity = itemView.findViewById(R.id.item_provider_city);
+            providerBanner =  itemView.findViewById(R.id.item_provider_provider_banner);
+
+            providerBanner.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            itemView.setOnClickListener(this);
+
         }
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(mContext, serviceNameTxtView.getText(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, providerName.getText(), Toast.LENGTH_SHORT).show();
         }
     }
 }

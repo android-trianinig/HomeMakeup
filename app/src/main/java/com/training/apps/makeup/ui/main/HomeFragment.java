@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.training.apps.makeup.Adaptre.ProviderRecycleAdapter;
 import com.training.apps.makeup.Adaptre.ServiceRecycleAdapter;
 import com.training.apps.makeup.Adaptre.SliderPagerAdapter;
 import com.training.apps.makeup.R;
+import com.training.apps.makeup.model.MyProvider;
 import com.training.apps.makeup.model.MyService;
 import com.training.apps.makeup.model.Offer;
 
@@ -35,11 +37,15 @@ public class HomeFragment extends Fragment {
     private SliderPagerAdapter adapter;
     private RecyclerView servicesTitleRec;
     private ServiceRecycleAdapter serviceRecycleAdapter;
+    private List<MyProvider> myProviders;
+    private RecyclerView providersRecView;
+    private ProviderRecycleAdapter providerRecycleAdapter;
 
 
-    public HomeFragment(List<Offer> offers, List<MyService> services) {
+    public HomeFragment(List<Offer> offers, List<MyService> services, List<MyProvider> providers) {
         this.offers = offers;
         this.services = services;
+        this.myProviders = providers;
     }
 
     public HomeFragment() {
@@ -48,13 +54,13 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         pager = view.findViewById(R.id.home_slider);
         adapter = new SliderPagerAdapter(offers, getContext());
         pager.setAdapter(adapter);
 
-
+        //services recycler view setup
         servicesTitleRec = view.findViewById(R.id.rec_service_titles);
         servicesTitleRec.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         servicesTitleRec.setHasFixedSize(true);
@@ -62,6 +68,13 @@ public class HomeFragment extends Fragment {
         serviceRecycleAdapter.setMyServices(services);
         servicesTitleRec.setAdapter(serviceRecycleAdapter);
 
+        //providers recycler view setup
+        providersRecView = view.findViewById(R.id.rec_providers);
+        providersRecView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        providersRecView.setHasFixedSize(true);
+        providerRecycleAdapter = new ProviderRecycleAdapter(getContext());
+        providerRecycleAdapter.setMyProviders(myProviders);
+        providersRecView.setAdapter(providerRecycleAdapter);
         return view;
 
     }

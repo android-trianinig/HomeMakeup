@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.training.apps.makeup.R;
+import com.training.apps.makeup.model.MyProvider;
 import com.training.apps.makeup.model.MyService;
 import com.training.apps.makeup.model.Offer;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentManager fragmentManager;
     private List<Offer> offerList;
     private List<MyService> myServiceList;
+    private List<MyProvider> myProviders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myServiceList.add(new MyService("Makeup"));
         myServiceList.add(new MyService("Manicure"));
 
+        myProviders = new ArrayList<>();
+        myProviders.add(new MyProvider("Hend Ali", 1, "Alexandria", "Salon/Women", 10, R.drawable.pro1));
+        myProviders.add(new MyProvider("Sama Ibrahim", 2, "Cairo", "Salon/Women", 5, R.drawable.pro2));
+        myProviders.add(new MyProvider("Haya Helal", 3, "Riyadh", "Salon/Women", 3, R.drawable.pro3));
+        myProviders.add(new MyProvider("Zainab El-taweel", 4, "Mecca", "Salon/Women", 8, R.drawable.pro4));
+        myProviders.add(new MyProvider("Elahm Ali", 5, "Medina", "Salon/Women", 9, R.drawable.pro5));
 
 
 
@@ -69,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (savedInstanceState == null) {
             fragmentManager.
                     beginTransaction()
-                    .replace(R.id.fragment_container_drw, new HomeFragment(offerList, myServiceList)).commit();
+                    .replace(R.id.fragment_container_drw, new HomeFragment(offerList, myServiceList, myProviders)).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
 
@@ -90,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_home:
                 fragmentManager.
                         beginTransaction()
-                        .replace(R.id.fragment_container_drw, new HomeFragment(offerList, myServiceList)).commit();
+                        .replace(R.id.fragment_container_drw, new HomeFragment(offerList, myServiceList, myProviders)).commit();
                 break;
 
             case R.id.nav_personal_page:
