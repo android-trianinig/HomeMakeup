@@ -2,13 +2,12 @@ package com.training.apps.makeup.ui.signUpAndLoginِ;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.training.apps.makeup.Adaptre.PageAdapter;
@@ -24,14 +23,14 @@ public class FragmentSignUp extends Fragment {
 
 
     private PageAdapter pageAdapter;
-    private   ViewPager pager;
+    private ViewPager pager;
     private TabLayout tabLayout;
     private List<Fragment> fragmentList;
     private List<String> titles;
+
     public static FragmentSignUp newInstance() {
         return new FragmentSignUp();
     }
-
 
 
     @Override
@@ -41,23 +40,23 @@ public class FragmentSignUp extends Fragment {
         View view = inflater.inflate(R.layout.fragment_base_sign_up, container, false);
         fragmentList = new ArrayList<>();
         titles = new ArrayList<>();
-       pager = view.findViewById(R.id.pager);
+        pager = view.findViewById(R.id.pager);
         pageAdapter = new PageAdapter(getChildFragmentManager());
         intitfragmentspage();
 
         pageAdapter.addfragments(fragmentList);
         pageAdapter.addTitles(titles);
         pager.setAdapter(pageAdapter);
-       tabLayout = view.findViewById(R.id.tab);
+        tabLayout = view.findViewById(R.id.tab);
         tabLayout.setupWithViewPager(pager);
 
         return view;
     }
+
     private void intitfragmentspage() {
 
         fragmentList.add(FragmentProviderSignUp.newInstance());
         fragmentList.add(FragmentClientSignUp.newInstance());
-
 
 
         titles.add(getString(R.string.provider));

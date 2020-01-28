@@ -40,7 +40,10 @@ public class StartingActivity extends AppCompatActivity  {
         fragment_count += 1;
         fragment_sign_up = FragmentSignUp.newInstance();
         if (fragment_sign_up.isAdded()) {
-            fragmentManager.beginTransaction().show(fragment_sign_up).commit();
+            fragmentManager.beginTransaction()
+//                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                    .show(fragment_sign_up)
+                    .commit();
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragment_sign_up, "fragment_sign_up").addToBackStack("fragment_sign_up").commit();
         }

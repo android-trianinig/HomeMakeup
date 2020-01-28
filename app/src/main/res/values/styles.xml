@@ -9,6 +9,16 @@
         <item name="android:dropDownListViewStyle">@style/SpinnerStyle</item>
     </style>
 
+    <style name="NavigationDrawerYellowSelected" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlHighlight">@color/yellow</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="SpinnerStyle" parent="Widget.AppCompat.ListView.DropDown">
         <item name="android:divider">@color/colorAccent</item>
         <item name="android:dividerHeight">0.5dp</item>
