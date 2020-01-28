@@ -1,4 +1,4 @@
-package com.training.apps.makeup.ui.signUpAndLoginِ;
+package com.training.apps.makeup.ui.signUpAndLogin;
 
 
 import android.content.BroadcastReceiver;
@@ -7,11 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +16,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.bumptech.glide.Glide;
 import com.training.apps.makeup.R;
@@ -34,7 +33,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentClientSignUp extends Fragment {
+public class FragmentProviderSignUp extends Fragment {
     private String userType;
     private String mUserName;
     private String mUserPhoneNumber;
@@ -49,36 +48,37 @@ public class FragmentClientSignUp extends Fragment {
     private BroadcastReceiver broadcastReceiver;
 
 
-    @BindView(R.id.edt_client_name)
+    @BindView(R.id.edt_pro_name)
     EditText userNameView;
 
-    @BindView(R.id.edt_client_email)
+    @BindView(R.id.edt_pro_email)
     EditText userEmailView;
 
-    @BindView(R.id.spinner_client_city)
+    @BindView(R.id.spinner_pro_city)
     Spinner userCitySpinner;
 
-    @BindView(R.id.edt_client_phone)
+    @BindView(R.id.edt_pro_phone)
     EditText userPhoneView;
 
-    @BindView(R.id.edt_client_password)
+    @BindView(R.id.edt_pro_password)
     EditText userPasswordView;
 
-    @BindView(R.id.txt_client_location)
+    @BindView(R.id.txt_pro_location)
     TextView userLocationTextView;
 
-    @BindView(R.id.img_user)
+    @BindView(R.id.img_user_pro)
     ImageView userImageView;
 
     @BindView(R.id.txt_add_photo)
     TextView newPhotoTextView;
 
-    @BindView(R.id.new_user_sign_up_btn)
+    @BindView(R.id.new_user_sign_up_btn_pro)
     Button addNewUser;
     private int PICK_IMAGE = 1212;
 
-    public static FragmentClientSignUp newInstance() {
-        return new FragmentClientSignUp();
+
+    public static FragmentProviderSignUp newInstance() {
+        return new FragmentProviderSignUp();
     }
 
 
@@ -87,7 +87,7 @@ public class FragmentClientSignUp extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_client_sign_up, container, false);
+        View view = inflater.inflate(R.layout.fragment_provider_sign_up, container, false);
         ButterKnife.bind(this, view);
 
         userCitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -103,7 +103,6 @@ public class FragmentClientSignUp extends Fragment {
         });
 
 
-
         userLocationTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,8 +110,6 @@ public class FragmentClientSignUp extends Fragment {
                 startActivity(mapIntent);
             }
         });
-
-
 
 
         broadcastReceiver = new BroadcastReceiver() {
@@ -149,10 +146,10 @@ public class FragmentClientSignUp extends Fragment {
                 if (data != null) {
 //                    try {
 //                        InputStream inputStream = getContext().getContentResolver().openInputStream(data.getData());
-                        Uri selectedImage = data.getData();
-                        newPhotoTextView.setVisibility(View.GONE);
-                        Glide.with(this).load(selectedImage)
-                                .into(userImageView);
+                    Uri selectedImage = data.getData();
+                    newPhotoTextView.setVisibility(View.GONE);
+                    Glide.with(this).load(selectedImage)
+                            .into(userImageView);
 //                        Bitmap userPhoto = BitmapFactory.decodeStream(inputStream);
 //                    } catch (FileNotFoundException e) {
 //                        e.printStackTrace();

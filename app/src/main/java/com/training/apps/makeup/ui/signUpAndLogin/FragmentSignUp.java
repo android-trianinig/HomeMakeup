@@ -1,4 +1,4 @@
-package com.training.apps.makeup.ui.signUpAndLoginِ;
+package com.training.apps.makeup.ui.signUpAndLogin;
 
 
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.training.apps.makeup.ui.signUpAndLoginِ;
+package com.training.apps.makeup.ui.signUpAndLogin;
 
 
 import android.content.Intent;
@@ -70,6 +70,7 @@ public class FragmentSignIn extends Fragment {
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startingActivity.finish();
                 Intent mainActivityIntent = new Intent(getContext(), MainActivity.class);
                 startActivity(mainActivityIntent);
             }

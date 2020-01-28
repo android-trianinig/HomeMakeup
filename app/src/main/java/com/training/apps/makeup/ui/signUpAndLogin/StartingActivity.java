@@ -1,9 +1,8 @@
-package com.training.apps.makeup.ui.signUpAndLoginِ;
+package com.training.apps.makeup.ui.signUpAndLogin;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 import androidx.fragment.app.FragmentManager;
 
 import com.training.apps.makeup.R;

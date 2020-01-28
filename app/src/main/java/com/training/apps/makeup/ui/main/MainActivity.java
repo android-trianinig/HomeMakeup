@@ -13,18 +13,41 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.training.apps.makeup.R;
-import com.training.apps.makeup.ui.signUpAndLoginِ.HomeFragment;
+import com.training.apps.makeup.model.MyService;
+import com.training.apps.makeup.model.Offer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private FragmentManager fragmentManager;
+    private List<Offer> offerList;
+    private List<MyService> myServiceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        offerList = new ArrayList<>();
+        offerList.add(new Offer("offer1", 1, R.drawable.home_makeup_offer1));
+        offerList.add(new Offer("offer2", 2, R.drawable.home_makeup_offer2));
+        offerList.add(new Offer("offer3", 3, R.drawable.home_makeup_offer3));
+        offerList.add(new Offer("offer4", 4, R.drawable.home_makeup_offer4));
+
+        myServiceList = new ArrayList<>();
+        myServiceList.add(new MyService("All"));
+        myServiceList.add(new MyService("Henaa"));
+        myServiceList.add(new MyService("Body Care"));
+        myServiceList.add(new MyService("Hair Cut"));
+        myServiceList.add(new MyService("Makeup"));
+        myServiceList.add(new MyService("Manicure"));
+
+
+
 
         fragmentManager = getSupportFragmentManager();
 
@@ -46,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (savedInstanceState == null) {
             fragmentManager.
                     beginTransaction()
-                    .replace(R.id.fragment_container_drw, new HomeFragment()).commit();
+                    .replace(R.id.fragment_container_drw, new HomeFragment(offerList, myServiceList)).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
 
@@ -67,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_home:
                 fragmentManager.
                         beginTransaction()
-                        .replace(R.id.fragment_container_drw, new HomeFragment()).commit();
+                        .replace(R.id.fragment_container_drw, new HomeFragment(offerList, myServiceList)).commit();
                 break;
 
             case R.id.nav_personal_page:

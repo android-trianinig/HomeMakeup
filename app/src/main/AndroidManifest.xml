@@ -16,7 +16,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ui.signUpAndLoginِ.StartingActivity"
+            android:name=".ui.signUpAndLogin.StartingActivity"
             android:launchMode="singleTop" android:configChanges="orientation|screenSize|layoutDirection">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity" android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ui.main.MainActivity" android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop" android:configChanges="orientation|screenSize|layoutDirection">
 
         </activity>
         <activity android:name=".ui.MapActivity" android:label="Map"/>
