@@ -3,18 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="85dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/service_title_shape"
     android:layout_margin="5dp"
+    android:background="@drawable/service_title_shape"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/txt_service_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="8dp"
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="@color/black"
-        android:padding="8dp"
-        tools:text="all"/>
+        tools:text="all" />
 </LinearLayout>

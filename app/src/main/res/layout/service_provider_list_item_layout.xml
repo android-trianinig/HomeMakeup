@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:layout_margin="5dp"
-    app:cardUseCompatPadding="true"
-    app:strokeColor="@color/colorAccent"
-    app:strokeWidth="1dp"
+    app:cardCornerRadius="10dp"
     app:cardPreventCornerOverlap="false"
-    app:cardCornerRadius="10dp">
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +18,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.3">
+            android:layout_weight="1.3"
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/item_provider_name"
@@ -35,6 +34,8 @@
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
@@ -87,8 +88,8 @@
                 android:id="@+id/provider_address_ic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
                 android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
                 android:src="@drawable/address_png"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,29 +100,24 @@
                 android:id="@+id/item_provider_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Alexandria"
-                android:textColor="@color/black"
                 android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/provider_address_ic"
                 app:layout_constraintStart_toEndOf="@+id/provider_address_ic"
-                app:layout_constraintTop_toTopOf="@+id/provider_address_ic" />
+                app:layout_constraintTop_toTopOf="@+id/provider_address_ic"
+                tools:text="Alexandria" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.training.apps.makeup.ui.main.RoundedTopImageView
             android:id="@+id/item_provider_provider_banner"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
+            android:layout_weight="2"
             android:scaleType="centerCrop"
             android:src="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/item_provider_name"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
-
-
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

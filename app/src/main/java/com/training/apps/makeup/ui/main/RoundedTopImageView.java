@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.training.apps.makeup.utils.DisplayUtils;
@@ -19,10 +20,10 @@ public class RoundedTopImageView extends AppCompatImageView {
     private Paint mPaint;
     private Path mPath;
     private Bitmap mBitmap;
-    private Matrix                      mMatrix;
-    private int                         mRadius = DisplayUtils.convertDpToPixel(10);
-    private int                         mWidth;
-    private int                         mHeight;
+    private Matrix mMatrix;
+    private int mRadius = DisplayUtils.convertDpToPixel(10);
+    private int mWidth;
+    private int mHeight;
     private Drawable mDrawable;
 
     public RoundedTopImageView(Context context) {
@@ -60,10 +61,10 @@ public class RoundedTopImageView extends AppCompatImageView {
 
         //Fit to screen.
         float scale;
-        if ((mHeight / (float)bDIHeight) >= (mWidth / (float)bDIWidth)){
-            scale =  mHeight / (float)bDIHeight;
+        if ((mHeight / (float) bDIHeight) >= (mWidth / (float) bDIWidth)) {
+            scale = mHeight / (float) bDIHeight;
         } else {
-            scale = mWidth / (float)bDIWidth;
+            scale = mWidth / (float) bDIWidth;
         }
 
         float borderLeft = (mWidth - (bDIWidth * scale)) / 2;
@@ -81,12 +82,12 @@ public class RoundedTopImageView extends AppCompatImageView {
 
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if(bitmapDrawable.getBitmap() != null) {
+            if (bitmapDrawable.getBitmap() != null) {
                 return bitmapDrawable.getBitmap();
             }
         }
 
-        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+        if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
             bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
         } else {
             bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);

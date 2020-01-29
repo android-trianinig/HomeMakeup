@@ -28,13 +28,13 @@
             android:layout_marginRight="15dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/edit_rounded_corners"
+            android:ellipsize="marquee"
             android:gravity="center_vertical"
             android:hint="@string/drag_to_your_location"
-            android:padding="8dp"
-            android:singleLine="true"
-            android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
+            android:padding="8dp"
             android:scrollHorizontally="true"
+            android:singleLine="true"
             android:textSize="14sp" />
 
         <Button
