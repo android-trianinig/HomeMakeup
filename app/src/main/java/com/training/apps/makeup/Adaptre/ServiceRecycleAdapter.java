@@ -1,7 +1,6 @@
 package com.training.apps.makeup.Adaptre;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,13 +53,13 @@ public class ServiceRecycleAdapter extends RecyclerView.Adapter<ServiceRecycleAd
         notifyDataSetChanged();
     }
 
-    public class ServiceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ServiceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView serviceNameTxtView;
 
         public ServiceViewHolder(@NonNull View itemView) {
             super(itemView);
             serviceNameTxtView = itemView.findViewById(R.id.txt_service_name);
-            serviceNameTxtView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override

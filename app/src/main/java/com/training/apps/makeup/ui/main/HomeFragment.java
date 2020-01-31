@@ -2,11 +2,9 @@ package com.training.apps.makeup.ui.main;
 
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,8 +20,6 @@ import com.training.apps.makeup.model.MyService;
 import com.training.apps.makeup.model.Offer;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,7 +74,6 @@ public class HomeFragment extends Fragment {
         return view;
 
     }
-
 
 
 }

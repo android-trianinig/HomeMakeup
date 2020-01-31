@@ -8,5 +8,8 @@
     <color name="gray4">#bababa</color>
     <color name="white">#fff</color>
     <color name="yellow">#ffa000</color>
+    <color name="yellow_light">#ffe082</color>
+
+
 
 </resources>

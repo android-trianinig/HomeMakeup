@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="85dp"
+    android:layout_width="70dp"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="@drawable/service_title_shape"
+    android:layout_marginRight="1dp"
+    android:layout_marginLeft="1dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/img_service_title"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="5dp"
+        app:riv_corner_radius="20dip"
+        android:src="@color/yellow"/>
 
     <TextView
         android:id="@+id/txt_service_name"
@@ -13,8 +24,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
-        android:padding="8dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="5dp"
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="@color/black"
-        tools:text="all" />
+        tools:text="Body Care" />
 </LinearLayout>

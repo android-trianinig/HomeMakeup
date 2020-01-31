@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.imageview.ExperimentalImageView;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.shape.CornerFamily;
+import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.training.apps.makeup.R;
 import com.training.apps.makeup.model.MyProvider;
 import com.training.apps.makeup.ui.main.RoundedTopImageView;
@@ -66,7 +67,7 @@ public class ProviderRecycleAdapter extends RecyclerView.Adapter<ProviderRecycle
     public class ProviderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView providerName;
         TextView providerType;
-        RatingBar providerRate;
+        SimpleRatingBar providerRate;
         TextView providerCity;
         RoundedTopImageView providerBanner;
 

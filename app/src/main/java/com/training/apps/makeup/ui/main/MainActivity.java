@@ -1,12 +1,14 @@
 package com.training.apps.makeup.ui.main;
 
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
@@ -20,7 +22,10 @@ import com.training.apps.makeup.model.Offer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -28,11 +33,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private List<Offer> offerList;
     private List<MyService> myServiceList;
     private List<MyProvider> myProviders;
+    private int counter = 0;
+
+    @BindView(R.id.nav_home)
+    LinearLayout home;
+
+    @BindView(R.id.nav_personal_page)
+    LinearLayout personalPage;
+
+    @BindView(R.id.nav_notification)
+    LinearLayout notification;
+
+    @BindView(R.id.nav_my_requests)
+    LinearLayout myRequests;
+
+    @BindView(R.id.nav_call_us)
+    LinearLayout callUs;
+
+    @BindView(R.id.nav_terms_and_conditions)
+    LinearLayout termsAndCondition;
+
+    @BindView(R.id.nav_exit)
+    LinearLayout exit;
+
+    @BindView(R.id.nav_lang)
+    RelativeLayout lang;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ButterKnife.bind(this);
+        home.setOnClickListener(this);
+        personalPage.setOnClickListener(this);
+        notification.setOnClickListener(this);
+        myRequests.setOnClickListener(this);
+        callUs.setOnClickListener(this);
+        termsAndCondition.setOnClickListener(this);
+        exit.setOnClickListener(this);
 
         offerList = new ArrayList<>();
         offerList.add(new Offer("offer1", 1, R.drawable.home_makeup_offer1));
@@ -56,11 +96,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myProviders.add(new MyProvider("Elahm Ali", 5, "Medina", "Salon/Women", 9, R.drawable.pro5));
 
 
-
         fragmentManager = getSupportFragmentManager();
 
         navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,7 +116,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager.
                     beginTransaction()
                     .replace(R.id.fragment_container_drw, new HomeFragment(offerList, myServiceList, myProviders)).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+            setSelectedItemColor(R.id.nav_home);
+            counter = 0;
         }
 
     }
@@ -92,47 +131,86 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else super.onBackPressed();
     }
 
+
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+    public void onClick(View v) {
+        setAllItemsBackgroundToDefault();
+        switch (v.getId()) {
             case R.id.nav_home:
-                fragmentManager.
-                        beginTransaction()
-                        .replace(R.id.fragment_container_drw, new HomeFragment(offerList, myServiceList, myProviders)).commit();
+                if (counter != 0) {
+                    setSelectedItemColor(v.getId());
+                    counter = 0;
+                    fragmentManager.
+                            beginTransaction()
+                            .replace(R.id.fragment_container_drw, new HomeFragment(offerList, myServiceList, myProviders)).commit();
+                }
                 break;
 
             case R.id.nav_personal_page:
-                fragmentManager.
-                        beginTransaction()
-                        .replace(R.id.fragment_container_drw, new PersonalPageFragment()).commit();
+                if (counter != 1) {
+                    setSelectedItemColor(v.getId());
+                    counter = 1;
+                    fragmentManager.
+                            beginTransaction()
+                            .replace(R.id.fragment_container_drw, new PersonalPageFragment()).commit();
+                }
                 break;
             case R.id.nav_notification:
-                fragmentManager.
-                        beginTransaction()
-                        .replace(R.id.fragment_container_drw, new NotificationFragment()).commit();
+                if (counter != 2) {
+                    counter = 2;
+                    setSelectedItemColor(v.getId());
+                    fragmentManager.
+                            beginTransaction()
+                            .replace(R.id.fragment_container_drw, new NotificationFragment()).commit();
+                }
                 break;
             case R.id.nav_my_requests:
-                fragmentManager.
-                        beginTransaction()
-                        .replace(R.id.fragment_container_drw, new MyRequestsFragment()).commit();
+                if (counter != 3) {
+                    counter = 3;
+                    setSelectedItemColor(v.getId());
+                    fragmentManager.
+                            beginTransaction()
+                            .replace(R.id.fragment_container_drw, new MyRequestsFragment()).commit();
+                }
                 break;
             case R.id.nav_call_us:
-                fragmentManager.
-                        beginTransaction()
-                        .replace(R.id.fragment_container_drw, new CallUsFragment()).commit();
+                if (counter != 4) {
+                    counter = 4;
+                    setSelectedItemColor(v.getId());
+                    fragmentManager.
+                            beginTransaction()
+                            .replace(R.id.fragment_container_drw, new CallUsFragment()).commit();
+                }
                 break;
             case R.id.nav_terms_and_conditions:
-                fragmentManager.
-                        beginTransaction()
-                        .replace(R.id.fragment_container_drw, new TermsAndConditionFragment()).commit();
+                if (counter != 5) {
+                    counter = 5;
+                    setSelectedItemColor(v.getId());
+                    fragmentManager.
+                            beginTransaction()
+                            .replace(R.id.fragment_container_drw, new TermsAndConditionFragment()).commit();
+                }
                 break;
-            case R.id.nav_lang:
-                //change lang
-                break;
+
             default:
                 finish();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
+
+    void setSelectedItemColor(int itemId) {
+        View view = findViewById(itemId);
+        view.setBackgroundColor(ContextCompat.getColor(this, R.color.yellow));
+    }
+
+    void setAllItemsBackgroundToDefault() {
+        home.setBackgroundResource(R.drawable.nav_selector);
+        personalPage.setBackgroundResource(R.drawable.nav_selector);
+        notification.setBackgroundResource(R.drawable.nav_selector);
+        myRequests.setBackgroundResource(R.drawable.nav_selector);
+        callUs.setBackgroundResource(R.drawable.nav_selector);
+        termsAndCondition.setBackgroundResource(R.drawable.nav_selector);
+    }
+
 }
+
