@@ -1,4 +1,4 @@
-package com.training.apps.makeup.ui;
+package com.training.apps.makeup.ui.map;
 
 import android.Manifest;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -46,6 +44,8 @@ import com.training.apps.makeup.R;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,12 +83,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     }
 
 
-    private void setUserSelectedLocation(LatLng latLng) {
+    private void setUserSelectedLocation(final LatLng latLng) {
         userLatLong = latLng;
         geocoder = new Geocoder(MapActivity.this);
-        new AsyncTask() {
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(new Runnable() {
+
             @Override
-            protected Object doInBackground(Object[] objects) {
+            public void run() {
+                Looper.prepare();
                 try {
                     List<Address> addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
                     if (addressList != null && addressList.size() > 0) {
@@ -102,11 +105,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
                     }
                 } catch (IOException e) {
-                    Toast.makeText(MapActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapActivity.this, "Check your Connection", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
-                return null;
             }
-        }.execute();
+        });
 
 
     }
@@ -191,14 +194,16 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         };
 
         mMap.setOnMarkerDragListener(onMarkerDragListener);
+
+
         confirmLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("location-confirmed");
-                intent.putExtra("userAddress", userAddress);
+                intent.putExtra("user_address", userAddress);
                 intent.putExtra("userLat", userLatLong.latitude);
                 intent.putExtra("userLong", userLatLong.longitude);
-                LocalBroadcastManager.getInstance(MapActivity.this).sendBroadcast(intent);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });

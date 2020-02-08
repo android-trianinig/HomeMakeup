@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="java.util.List" />
+
+        <variable
+            name="client"
+            type="com.training.apps.makeup.model.Client" />
+
+        <variable
+            name="cities"
+            type="List&lt;String>" />
+
+        <variable
+            name="onLocationClickHandler"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="onConfirmClickHandler"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/profile_header"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:src="@color/yellow"
+                app:layout_constraintBottom_toTopOf="@+id/profile_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_header"
+                app:layout_constraintVertical_bias="0.36"
+                app:riv_corner_radius="50dp" />
+
+
+            <RelativeLayout
+                android:id="@+id/profile_change_img"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="72dp"
+                android:layout_marginLeft="72dp"
+                android:background="@drawable/ic_change_profile_image"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+                app:layout_constraintStart_toStartOf="@+id/profile_image"
+                app:layout_constraintTop_toTopOf="@+id/profile_image"
+                app:layout_constraintVertical_bias="1.0">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_camera" />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/edit_fields_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_header"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_name" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="37dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        app:errorEnabled="false"
+                        app:hintEnabled="false">
+
+                        <EditText
+                            android:id="@+id/edit_profile_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@color/white"
+                            android:hint="@string/sign_up_user_name"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:text="@={client.clientName}"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/gray4"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray4" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_mail" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="37dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        app:errorEnabled="false"
+                        app:hintEnabled="false">
+
+                        <EditText
+                            android:id="@+id/edit_profile_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@color/white"
+                            android:hint="@string/sign_up_user_name"
+                            android:inputType="textEmailAddress"
+                            android:singleLine="true"
+                            android:text="@={client.clientEmail}"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/gray4"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray4" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_phone" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="37dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        app:errorEnabled="false"
+                        app:hintEnabled="false">
+
+                        <EditText
+                            android:id="@+id/edit_profile_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@color/white"
+                            android:hint="@string/sign_up_user_name"
+                            android:inputType="phone"
+                            android:singleLine="true"
+                            android:text="@={client.clientPhoneNumber}"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textColorHint="@color/gray4"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray4" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_city"
+                        android:tint="@color/colorPrimary" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/edit_profile_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="37dp"
+                        android:layout_gravity="center_vertical"
+                        android:dropDownSelector="@android:color/holo_purple"
+                        android:spinnerMode="dropdown"
+                        app:entries="@{cities}"
+                        bind:selectedValue="@={client.clientCity}" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray4" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_address"
+                        android:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/edit_profile_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="37dp"
+                        android:ellipsize="marquee"
+                        android:gravity="center_vertical"
+                        android:hint="@string/sign_up_user_location"
+                        android:onClick="@{onLocationClickHandler}"
+                        android:singleLine="true"
+                        android:text="@={client.clientAddress}"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/gray4"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/gray4" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_confirm_profile_edit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="120dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/sign_in_button_rounded_corners"
+                android:text="@string/confirm_edit_profile"
+                android:textColor="@color/white"
+                android:onClick="@{onConfirmClickHandler}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_fields_layout" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</layout>

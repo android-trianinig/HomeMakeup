@@ -1,4 +1,4 @@
-package com.training.apps.makeup.ui.signUpAndLogin;
+package com.training.apps.makeup.ui.signUpAndLogin.signUp;
 
 
 import android.os.Bundle;
@@ -10,8 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.training.apps.makeup.Adaptre.PageAdapter;
+import com.training.apps.makeup.Adaptre.SignUpFragmentPageAdapter;
 import com.training.apps.makeup.R;
+import com.training.apps.makeup.databinding.FragmentBaseSignUpBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +23,10 @@ import java.util.List;
 public class FragmentSignUp extends Fragment {
 
 
-    private PageAdapter pageAdapter;
+    private SignUpFragmentPageAdapter signUpFragmentPageAdapter;
     private ViewPager pager;
     private TabLayout tabLayout;
+    public FragmentBaseSignUpBinding mBinding;
     private List<Fragment> fragmentList;
     private List<String> titles;
 
@@ -37,20 +39,20 @@ public class FragmentSignUp extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_base_sign_up, container, false);
+        mBinding = FragmentBaseSignUpBinding.inflate(inflater);
         fragmentList = new ArrayList<>();
         titles = new ArrayList<>();
-        pager = view.findViewById(R.id.pager);
-        pageAdapter = new PageAdapter(getChildFragmentManager());
+        pager = mBinding.pager;
+        signUpFragmentPageAdapter = new SignUpFragmentPageAdapter(getChildFragmentManager());
         intitfragmentspage();
 
-        pageAdapter.addfragments(fragmentList);
-        pageAdapter.addTitles(titles);
-        pager.setAdapter(pageAdapter);
-        tabLayout = view.findViewById(R.id.tab);
+        signUpFragmentPageAdapter.addFragments(fragmentList);
+        signUpFragmentPageAdapter.addTitles(titles);
+        pager.setAdapter(signUpFragmentPageAdapter);
+        tabLayout = mBinding.tab;
         tabLayout.setupWithViewPager(pager);
 
-        return view;
+        return mBinding.getRoot();
     }
 
     private void intitfragmentspage() {

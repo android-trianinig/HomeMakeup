@@ -54,4 +54,16 @@
     <string name="english_lang_drw">English</string>
     <string name="arabic_lang_drw">عربي</string>
     <string name="rates_label">Rates</string>
+    <string name="name_profile">Name</string>
+    <string name="email_profile">Email</string>
+    <string name="phone_profile">Phone Number</string>
+    <string name="city_profile">City</string>
+    <string name="address_profile">Address</string>
+    <string name="edit_profile">Edit</string>
+    <string name="confirm_edit_profile">Confirm</string>
+    <string name="previous_requests_title">Previous Requests</string>
+    <string name="current_requests_title">Current Requests</string>
+    <string name="provider_services_list">Services</string>
+    <string name="provider_map_location">Location</string>
+    <string name="provider_rates">Rates</string>
 </resources>

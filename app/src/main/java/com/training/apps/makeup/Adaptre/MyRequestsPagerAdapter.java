@@ -9,18 +9,16 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageAdapter extends FragmentPagerAdapter {
+public class MyRequestsPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList;
     private List<String> titles;
-    public PageAdapter(FragmentManager fm) {
+    public MyRequestsPagerAdapter(FragmentManager fm) {
         super(fm);
         fragmentList=new ArrayList<>();
         titles = new ArrayList<>();
     }
-public void addfragments(List<Fragment> fragmentList){
+public void addFragments(List<Fragment> fragmentList){
         this.fragmentList.addAll(fragmentList);
-    //Log.e("kjjj",this.fragmentList.size()+"");
-
 
 }
 
@@ -44,4 +42,5 @@ public void addfragments(List<Fragment> fragmentList){
         return titles.get(position);
 
     }
+
 }

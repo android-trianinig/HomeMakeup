@@ -1,5 +1,6 @@
 package com.training.apps.makeup.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,17 +16,20 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.training.apps.makeup.R;
+import com.training.apps.makeup.data.HomeMakeupRepo;
 import com.training.apps.makeup.model.MyProvider;
 import com.training.apps.makeup.model.MyService;
 import com.training.apps.makeup.model.Offer;
+import com.training.apps.makeup.ui.main.myProfile.EditProfileActivity;
+import com.training.apps.makeup.ui.main.myProfile.PersonalPageFragment;
+import com.training.apps.makeup.ui.main.myRequestsFragments.MyRequestsFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, IMainClickHandler {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -74,26 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         termsAndCondition.setOnClickListener(this);
         exit.setOnClickListener(this);
 
-        offerList = new ArrayList<>();
-        offerList.add(new Offer("offer1", 1, R.drawable.home_makeup_offer1));
-        offerList.add(new Offer("offer2", 2, R.drawable.home_makeup_offer2));
-        offerList.add(new Offer("offer3", 3, R.drawable.home_makeup_offer3));
-        offerList.add(new Offer("offer4", 4, R.drawable.home_makeup_offer4));
-
-        myServiceList = new ArrayList<>();
-        myServiceList.add(new MyService("All"));
-        myServiceList.add(new MyService("Henaa"));
-        myServiceList.add(new MyService("Body Care"));
-        myServiceList.add(new MyService("Hair Cut"));
-        myServiceList.add(new MyService("Makeup"));
-        myServiceList.add(new MyService("Manicure"));
-
-        myProviders = new ArrayList<>();
-        myProviders.add(new MyProvider("Hend Ali", 1, "Alexandria", "Salon/Women", 10, R.drawable.pro1));
-        myProviders.add(new MyProvider("Sama Ibrahim", 2, "Cairo", "Salon/Women", 5, R.drawable.pro2));
-        myProviders.add(new MyProvider("Haya Helal", 3, "Riyadh", "Salon/Women", 3, R.drawable.pro3));
-        myProviders.add(new MyProvider("Zainab El-taweel", 4, "Mecca", "Salon/Women", 8, R.drawable.pro4));
-        myProviders.add(new MyProvider("Elahm Ali", 5, "Medina", "Salon/Women", 9, R.drawable.pro5));
+        offerList = HomeMakeupRepo.myOffers;
+        myServiceList = HomeMakeupRepo.myServices;
+        myProviders = HomeMakeupRepo.myProviders;
 
 
         fragmentManager = getSupportFragmentManager();
@@ -212,5 +199,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         termsAndCondition.setBackgroundResource(R.drawable.nav_selector);
     }
 
+    @Override
+    public void openEditProfileActivity() {
+        startActivity(new Intent(this, EditProfileActivity.class));
+    }
 }
 

@@ -1,4 +1,4 @@
-package com.training.apps.makeup.ui.main;
+package com.training.apps.makeup.ui.main.provider;
 
 
 import android.os.Bundle;
@@ -14,19 +14,22 @@ import com.training.apps.makeup.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyRequestsFragment extends Fragment {
+public class ProviderRatesFragment extends Fragment {
 
 
-    public MyRequestsFragment() {
+    public ProviderRatesFragment() {
         // Required empty public constructor
     }
 
+    public static ProviderRatesFragment getInstance() {
+        return new ProviderRatesFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_requests, container, false);
+        return inflater.inflate(R.layout.fragment_provider_rates, container, false);
     }
 
 }

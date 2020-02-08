@@ -1,6 +1,7 @@
 package com.training.apps.makeup.Adaptre;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.training.apps.makeup.R;
 import com.training.apps.makeup.model.MyProvider;
 import com.training.apps.makeup.ui.main.RoundedTopImageView;
+import com.training.apps.makeup.ui.main.provider.ProviderPageActivity;
 
 import java.util.List;
 
@@ -87,7 +89,9 @@ public class ProviderRecycleAdapter extends RecyclerView.Adapter<ProviderRecycle
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(mContext, providerName.getText(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(mContext, ProviderPageActivity.class);
+            intent.putExtra("provider_name", myProviders.get(getAdapterPosition()).getProviderName());
+            mContext.startActivity(intent);
         }
     }
 }
