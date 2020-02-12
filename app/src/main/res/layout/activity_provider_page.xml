@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="provider"
+            type="com.training.apps.makeup.model.MyProvider" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.clientProvider.ProviderPageActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/provider_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimaryLight"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_shape"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="@color/colorPrimaryDark" />
+
+        <ImageView
+            android:id="@+id/img_provider"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:src="@color/yellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/provider_toolbar" />
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_provider"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/tab_background"
+            app:layout_constraintBottom_toBottomOf="@+id/img_provider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_provider"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="fill"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabPaddingEnd="16dp"
+            app:tabPaddingStart="16dp"
+            app:tabRippleColor="@null"
+            app:tabSelectedTextColor="@color/colorPrimaryDark"
+            app:tabTextAppearance="@style/AppTabTextAppearance" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager_provider"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_provider"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
