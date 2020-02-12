@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.training.apps.makeup.R;
+import com.training.apps.makeup.model.CartItem;
 import com.training.apps.makeup.model.ChildService;
 import com.training.apps.makeup.model.Client;
 import com.training.apps.makeup.model.MyNotification;
@@ -26,6 +27,7 @@ public class HomeMakeupRepo {
     public static List<MyService> myServices;
     public static List<String> cities;
     public static List<PreviousRequest> previousRequests;
+    public static List<CartItem> cartItems;
 
 
     static {
@@ -175,6 +177,7 @@ public class HomeMakeupRepo {
                 600,
                 "SR"));
 
+        cartItems = new ArrayList<>();
     }
 
 
