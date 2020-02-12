@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="65dp"
-    android:background="@color/purple_dark">
+    android:layout_marginTop="2dp"
+    android:id="@+id/child_layout"
+    android:background="@color/purple_light">
 
     <RadioButton
-        android:id="@+id/service_title_radio"
+        android:id="@+id/child_title_radio"
         style="@android:style/Widget.CompoundButton.RadioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,19 +19,20 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@color/white"
         android:textStyle="bold"
+        android:checked="false"
         app:buttonTint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="This is Item 1" />
 
     <TextView
-        android:id="@+id/service_duration"
+        android:id="@+id/child_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/service_title_radio"
+        app:layout_constraintTop_toBottomOf="@+id/child_title_radio"
         tools:text="30 Minute" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -40,7 +43,7 @@
         app:layout_constraintGuide_begin="35dp" />
 
     <TextView
-        android:id="@+id/service_cost"
+        android:id="@+id/child_cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
@@ -56,16 +59,16 @@
 
 
     <TextView
-        android:id="@+id/service_currency"
+        android:id="@+id/child_currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/service_cost"
-        app:layout_constraintStart_toStartOf="@+id/service_cost"
-        app:layout_constraintTop_toBottomOf="@+id/service_cost"
+        app:layout_constraintEnd_toEndOf="@+id/child_cost"
+        app:layout_constraintStart_toStartOf="@+id/child_cost"
+        app:layout_constraintTop_toBottomOf="@+id/child_cost"
         app:layout_constraintVertical_bias="0.00999999"
         tools:text="SR" />
 

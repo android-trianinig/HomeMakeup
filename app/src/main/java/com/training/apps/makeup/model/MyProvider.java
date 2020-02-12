@@ -5,6 +5,8 @@ import androidx.databinding.Bindable;
 
 import com.training.apps.makeup.BR;
 
+import java.util.List;
+
 public class MyProvider extends BaseObservable {
 
     private String providerName;
@@ -13,21 +15,23 @@ public class MyProvider extends BaseObservable {
     private String providerType;
     private double providerRate;
     private int providerImage;
-    private String providerPassword;
     private String providerPhoneNumber;
     private String providerEmail;
     private String providerLocation;
+    private List<MyService> providerServices;
+    private String providerPassword;
 
     public MyProvider() {
     }
 
-    public MyProvider(String providerName, int providerId, String providerCity, String providerType, double providerRate, int providerImage) {
+    public MyProvider(String providerName, int providerId, String providerCity, String providerType, double providerRate, int providerImage, List<MyService> providerServices) {
         this.providerName = providerName;
         this.providerId = providerId;
         this.providerCity = providerCity;
         this.providerType = providerType;
         this.providerRate = providerRate;
         this.providerImage = providerImage;
+        this.providerServices = providerServices;
     }
 
     @Bindable
@@ -58,10 +62,6 @@ public class MyProvider extends BaseObservable {
     @Bindable
     public int getProviderImage() {
         return providerImage;
-    }
-    @Bindable
-    public String getProviderPassword() {
-        return providerPassword;
     }
 
     @Bindable
@@ -109,10 +109,6 @@ public class MyProvider extends BaseObservable {
         notifyPropertyChanged(BR.providerImage);
     }
 
-    public void setProviderPassword(String providerPassword) {
-        this.providerPassword = providerPassword;
-        notifyPropertyChanged(BR.providerPassword);
-    }
 
     public void setProviderPhoneNumber(String providerPhoneNumber) {
         this.providerPhoneNumber = providerPhoneNumber;
@@ -127,5 +123,25 @@ public class MyProvider extends BaseObservable {
     public void setProviderLocation(String providerLocation) {
         this.providerLocation = providerLocation;
         notifyPropertyChanged(BR.providerLocation);
+    }
+
+    @Bindable
+    public List<MyService> getProviderServices() {
+        return providerServices;
+    }
+
+    public void setProviderServices(List<MyService> providerServices) {
+        this.providerServices = providerServices;
+        notifyPropertyChanged(BR.providerServices);
+    }
+
+    @Bindable
+    public String getProviderPassword() {
+        return providerPassword;
+    }
+
+    public void setProviderPassword(String providerPassword) {
+        this.providerPassword = providerPassword;
+        notifyPropertyChanged(BR.providerPassword);
     }
 }

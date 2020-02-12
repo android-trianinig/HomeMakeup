@@ -66,4 +66,7 @@
     <string name="provider_services_list">Services</string>
     <string name="provider_map_location">Location</string>
     <string name="provider_rates">Rates</string>
+    <string name="activity_notifaction_title">Notifications</string>
+    <string name="activity_requests_title">My Requests</string>
+    <string name="total_cost">Total Cost: </string>
 </resources>

@@ -1,6 +1,6 @@
 package com.training.apps.makeup.general_ui_method;
 
-public class GeneralMethod {
+public class  GeneralMethod {
 
 //    @BindingAdapter("error")
 //    public static void errorValidation(View view, String error) {

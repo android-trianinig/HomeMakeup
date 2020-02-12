@@ -137,7 +137,7 @@
                         app:layout_constraintEnd_toStartOf="@id/image_phone_code"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <!--                        android:onClick="@{()->showCountryListener.showDialog()}"-->
+                    <!--                        android:onDrawerItemClick="@{()->showCountryListener.showDialog()}"-->
                     <ImageView
                         android:id="@+id/image_phone_code"
                         android:layout_width="40dp"

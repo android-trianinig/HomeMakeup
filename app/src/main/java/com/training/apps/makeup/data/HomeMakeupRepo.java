@@ -13,7 +13,6 @@ import com.training.apps.makeup.model.Offer;
 import com.training.apps.makeup.model.PreviousRequest;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class HomeMakeupRepo {
@@ -25,7 +24,6 @@ public class HomeMakeupRepo {
     public static List<Offer> myOffers;
     public static List<MyProvider> myProviders;
     public static List<MyService> myServices;
-    public static HashMap<MyService, List<ChildService>> childServiceMap;
     public static List<String> cities;
     public static List<PreviousRequest> previousRequests;
 
@@ -49,11 +47,11 @@ public class HomeMakeupRepo {
 
 
         myProviders = new ArrayList<>();
-        myProviders.add(new MyProvider("Hend Ali", 1, "Alexandria", "Salon/Women", 10, R.drawable.pro1));
-        myProviders.add(new MyProvider("Sama Ibrahim", 2, "Cairo", "Salon/Women", 5, R.drawable.pro2));
-        myProviders.add(new MyProvider("Haya Helal", 3, "Riyadh", "Salon/Women", 3, R.drawable.pro3));
-        myProviders.add(new MyProvider("Zainab El-taweel", 4, "Mecca", "Salon/Women", 8, R.drawable.pro4));
-        myProviders.add(new MyProvider("Elahm Ali", 5, "Medina", "Salon/Women", 9, R.drawable.pro5));
+        myProviders.add(new MyProvider("Hend Ali", 1, "Alexandria", "Salon/Women", 10, R.drawable.pro1, null));
+        myProviders.add(new MyProvider("Sama Ibrahim", 2, "Cairo", "Salon/Women", 5, R.drawable.pro2, null));
+        myProviders.add(new MyProvider("Haya Helal", 3, "Riyadh", "Salon/Women", 3, R.drawable.pro3, null));
+        myProviders.add(new MyProvider("Zainab El-taweel", 4, "Mecca", "Salon/Women", 8, R.drawable.pro4, null));
+        myProviders.add(new MyProvider("Elahm Ali", 5, "Medina", "Salon/Women", 9, R.drawable.pro5, null));
 
         myOffers = new ArrayList<>();
         myOffers.add(new Offer("offer1", 1, R.drawable.home_makeup_offer1));
@@ -62,51 +60,45 @@ public class HomeMakeupRepo {
         myOffers.add(new Offer("offer4", 4, R.drawable.home_makeup_offer4));
 
         myServices = new ArrayList<>();
-        myServices.add(new MyService("All"));
-        myServices.add(new MyService("Henaa"));
-        myServices.add(new MyService("Body Care"));
-        myServices.add(new MyService("Hair Cut"));
-        myServices.add(new MyService("Makeup"));
-        myServices.add(new MyService("Manicure"));
+        myServices.add(new MyService("All", new ArrayList<>() ));
 
 
-        childServiceMap = new HashMap<>();
 
         List<ChildService> henaaChildServices = new ArrayList<>();
-        henaaChildServices.add(new ChildService("Black Henna", 200, "SR", "60 Minute"));
-        henaaChildServices.add(new ChildService("Brown Henna", 250, "SR", "60 Minute"));
-        henaaChildServices.add(new ChildService("Custom Henna", 300, "SR", "60 Minute"));
+        henaaChildServices.add(new ChildService("Black Henna", 200, "SR", "60 Minute", "Henaa"));
+        henaaChildServices.add(new ChildService("Brown Henna", 250, "SR", "60 Minute", "Henaa"));
+        henaaChildServices.add(new ChildService("Custom Henna", 300, "SR", "60 Minute", "Henaa"));
 
-        childServiceMap.put(myServices.get(1), henaaChildServices);
+        myServices.add(new MyService("Henaa", henaaChildServices));
 
 
         List<ChildService> bodyCareChildServices = new ArrayList<>();
-        bodyCareChildServices.add(new ChildService("Full Body Care", 800, "SR", "3 Hour"));
-        bodyCareChildServices.add(new ChildService("Bride Body Care", 1200, "SR", "4 Hour"));
-        bodyCareChildServices.add(new ChildService("Special Body Care", 1500, "SR", "5 Hour"));
+        bodyCareChildServices.add(new ChildService("Full Body Care", 800, "SR", "3 Hour", "Body Care"));
+        bodyCareChildServices.add(new ChildService("Bride Body Care", 1200, "SR", "4 Hour", "Body Care"));
+        bodyCareChildServices.add(new ChildService("Special Body Care", 1500, "SR", "5 Hour", "Body Care"));
 
-        childServiceMap.put(myServices.get(2), bodyCareChildServices);
+        myServices.add(new MyService("Body Care", bodyCareChildServices));
 
 
         List<ChildService> hairCutChildServices = new ArrayList<>();
-        hairCutChildServices.add(new ChildService("Special Hair Cut", 200, "SR", "60 Minute"));
-        hairCutChildServices.add(new ChildService("New Hair Cut Style", 250, "SR", "60 Minute"));
+        hairCutChildServices.add(new ChildService("Special Hair Cut", 200, "SR", "60 Minute", "Hair Cut"));
+        hairCutChildServices.add(new ChildService("New Hair Cut Style", 250, "SR", "60 Minute", "Hair Cut"));
 
-        childServiceMap.put(myServices.get(3),hairCutChildServices);
+        myServices.add(new MyService("Hair Cut", hairCutChildServices));
 
 
 
         List<ChildService> makeupChildServices = new ArrayList<>();
-        makeupChildServices.add(new ChildService("Full Makeup", 800, "SR", "60 Minute"));
-        makeupChildServices.add(new ChildService("Bride Makeup", 1000, "SR", "2 Hour"));
+        makeupChildServices.add(new ChildService("Full Makeup", 800, "SR", "60 Minute", "Makeup"));
+        makeupChildServices.add(new ChildService("Bride Makeup", 1000, "SR", "2 Hour", "Makeup"));
 
-        childServiceMap.put(myServices.get(4), makeupChildServices);
+        myServices.add(new MyService("Makeup", makeupChildServices));
 
         List<ChildService> manicureChildServices = new ArrayList<>();
-        manicureChildServices.add(new ChildService("Custom Manicure", 100, "SR", "60 Minute"));
-        manicureChildServices.add(new ChildService("Full Manicure", 200, "SR", "60 Minute"));
+        manicureChildServices.add(new ChildService("Custom Manicure", 100, "SR", "60 Minute", "Manicure"));
+        manicureChildServices.add(new ChildService("Full Manicure", 200, "SR", "60 Minute", "Manicure"));
 
-        childServiceMap.put(myServices.get(5),manicureChildServices);
+        myServices.add(new MyService("Manicure",manicureChildServices ));
 
 
         myNotifications = new ArrayList<>();

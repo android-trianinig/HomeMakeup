@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.training.apps.makeup.Adaptre.SignUpFragmentPageAdapter;
+import com.training.apps.makeup.Adaptre.MyFragmentPageAdapter;
 import com.training.apps.makeup.R;
 import com.training.apps.makeup.databinding.FragmentBaseSignUpBinding;
 
@@ -23,7 +23,7 @@ import java.util.List;
 public class FragmentSignUp extends Fragment {
 
 
-    private SignUpFragmentPageAdapter signUpFragmentPageAdapter;
+    private MyFragmentPageAdapter myFragmentPageAdapter;
     private ViewPager pager;
     private TabLayout tabLayout;
     public FragmentBaseSignUpBinding mBinding;
@@ -43,12 +43,12 @@ public class FragmentSignUp extends Fragment {
         fragmentList = new ArrayList<>();
         titles = new ArrayList<>();
         pager = mBinding.pager;
-        signUpFragmentPageAdapter = new SignUpFragmentPageAdapter(getChildFragmentManager());
+        myFragmentPageAdapter = new MyFragmentPageAdapter(getChildFragmentManager());
         intitfragmentspage();
 
-        signUpFragmentPageAdapter.addFragments(fragmentList);
-        signUpFragmentPageAdapter.addTitles(titles);
-        pager.setAdapter(signUpFragmentPageAdapter);
+        myFragmentPageAdapter.addFragments(fragmentList);
+        myFragmentPageAdapter.addTitles(titles);
+        pager.setAdapter(myFragmentPageAdapter);
         tabLayout = mBinding.tab;
         tabLayout.setupWithViewPager(pager);
 

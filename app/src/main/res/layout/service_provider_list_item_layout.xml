@@ -125,7 +125,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.training.apps.makeup.ui.main.RoundedTopImageView
+        <com.training.apps.makeup.utils.RoundedTopImageView
             android:id="@+id/item_provider_provider_banner"
             android:layout_width="0dp"
             android:layout_height="match_parent"

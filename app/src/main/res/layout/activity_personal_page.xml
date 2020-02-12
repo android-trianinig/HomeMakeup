@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="client"
+            type="com.training.apps.makeup.model.Client" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.main.clientProfile.PersonalPageActivity">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                android:elevation="4dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_arrow_shape"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <ImageView
+                android:id="@+id/profile_header"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/profile_imag"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:src="@color/yellow"
+                app:layout_constraintBottom_toTopOf="@+id/profile_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_header"
+                app:layout_constraintVertical_bias="0.36"
+                app:riv_corner_radius="50dp" />
+
+
+            <RelativeLayout
+                android:id="@+id/profile_change_img"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="72dp"
+                android:layout_marginLeft="72dp"
+                android:background="@drawable/ic_change_profile_image"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_imag"
+                app:layout_constraintStart_toStartOf="@+id/profile_imag"
+                app:layout_constraintTop_toTopOf="@+id/profile_imag"
+                app:layout_constraintVertical_bias="1.0">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_camera" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_header">
+
+                <include
+                    android:id="@+id/profile_name"
+                    layout="@layout/my_personal_page_info_layout"
+                    bind:data="@{client.clientName}" />
+
+                <include
+                    android:id="@+id/profile_email"
+                    layout="@layout/my_personal_page_info_layout"
+                    bind:data="@{client.clientEmail}" />
+
+                <include
+                    android:id="@+id/profile_phone"
+                    layout="@layout/my_personal_page_info_layout"
+                    bind:data="@{client.clientPhoneNumber}" />
+
+                <include
+                    android:id="@+id/profile_city"
+                    layout="@layout/my_personal_page_info_layout"
+                    bind:data="@{client.clientCity}" />
+
+                <include
+                    android:id="@+id/profile_address"
+
+                    layout="@layout/my_personal_page_info_layout"
+                    bind:data="@{client.clientAddress}" />
+
+            </LinearLayout>
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout"
+                app:layout_constraintVertical_bias="0.17000002" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="120dp"
+                android:layout_marginRight="120dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/sign_in_button_rounded_corners"
+                android:onClick="onEditBtnClick"
+                android:text="@string/edit_profile"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/map" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
