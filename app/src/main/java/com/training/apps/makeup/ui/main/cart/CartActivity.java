@@ -1,7 +1,11 @@
 package com.training.apps.makeup.ui.main.cart;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -30,12 +34,31 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<ChildService> childServices) {
                 if (childServices != null) {
-                    mBinding.setItemsListLiveData(HomeMakeupRepo.cartItems);
-                    mBinding.setItemsCost(getTotalCost(childServices));
-                    mBinding.setCurrency(getCurrency(childServices));
+                    if (childServices.size() > 0) {
+                        displayRecyclerList(childServices);
+                    } else {
+                        displayEmptyView();
+                    }
+                } else {
+                    displayEmptyView();
                 }
             }
         });
+    }
+
+    private void displayRecyclerList(List<ChildService> childServices) {
+        mBinding.emptyView.setVisibility(View.GONE);
+        mBinding.cartListRec.setVisibility(View.VISIBLE);
+        mBinding.setItemsListLiveData(HomeMakeupRepo.cartItems);
+        mBinding.setItemsCost(getTotalCost(childServices));
+        mBinding.setCurrency(getCurrency(childServices));
+    }
+
+    private void displayEmptyView() {
+        mBinding.setItemsCost(0);
+        mBinding.setCurrency("");
+        mBinding.cartListRec.setVisibility(View.GONE);
+        mBinding.emptyView.setVisibility(View.VISIBLE);
     }
 
     private String getCurrency(List<ChildService> childServices) {
@@ -56,4 +79,13 @@ public class CartActivity extends AppCompatActivity {
         return totalCost;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
+    }
 }

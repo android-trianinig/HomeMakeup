@@ -13,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.main.cart.CartActivity"></activity>
-        <activity android:name=".ui.main.clientProvider.ProviderPageActivity" />
+        <activity android:name=".ui.main.clientProvider.ProviderPageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.training.apps.makeup.ui.main.MainActivity" />
+        </activity>
         <activity android:name=".ui.main.clientProfile.EditProfileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

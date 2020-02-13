@@ -78,4 +78,7 @@
     <string name="please_selecte_time">Please Select Time!</string>
     <string name="next">Next</string>
     <string name="cart">Cart</string>
+    <string name="set_date_and_time">Set date and time</string>
+    <string name="your_cart_is_empty">Your cart is empty</string>
+    <string name="add_something_to_make_me_happy">Add something to make me happy :)</string>
 </resources>

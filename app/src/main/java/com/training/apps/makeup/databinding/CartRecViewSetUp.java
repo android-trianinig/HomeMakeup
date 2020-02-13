@@ -17,6 +17,11 @@ public class CartRecViewSetUp {
     @BindingAdapter("setItemsList")
     public static void setupRecyclerView(RecyclerView recyclerView, MutableLiveData<List<ChildService>> listMutableLiveData) {
 
+        if (listMutableLiveData == null) {
+
+            return;
+        }
+
         if (recyclerView.getLayoutManager() == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
             recyclerView.setHasFixedSize(true);
