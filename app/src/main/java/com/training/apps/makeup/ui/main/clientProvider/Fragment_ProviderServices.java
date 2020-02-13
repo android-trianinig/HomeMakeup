@@ -27,7 +27,7 @@ import com.training.apps.makeup.Adaptre.expandableRecView.ParentAdapter;
 import com.training.apps.makeup.R;
 import com.training.apps.makeup.data.HomeMakeupRepo;
 import com.training.apps.makeup.databinding.FragmentProviderServicesBinding;
-import com.training.apps.makeup.model.CartItem;
+import com.training.apps.makeup.model.SelectedService;
 import com.training.apps.makeup.model.MyService;
 
 import java.util.Calendar;
@@ -40,9 +40,9 @@ public class Fragment_ProviderServices extends Fragment implements DatePickerDia
 
     public FragmentProviderServicesBinding mBinding;
     private List<MyService> myServiceList;
-    public CartItem cartItem;
+    public SelectedService selectedService;
     private ConstraintLayout pickDate, pickTime;
-    private Button addToCart;
+    private ConstraintLayout addToCart;
     private TextView dataText, timeText;
     private boolean isDateSelected = false;
     private boolean isTimeSelected = false;
@@ -66,9 +66,9 @@ public class Fragment_ProviderServices extends Fragment implements DatePickerDia
                              Bundle savedInstanceState) {
         mBinding = FragmentProviderServicesBinding.inflate(inflater);
 
-        cartItem = new CartItem();
-        mBinding.setCartItem(cartItem);
-        ParentAdapter servicesAdapter = new ParentAdapter(getContext(), myServiceList, cartItem);
+        selectedService = new SelectedService();
+        mBinding.setSelectedService(selectedService);
+        ParentAdapter servicesAdapter = new ParentAdapter(getContext(), myServiceList, selectedService);
         mBinding.servicesListRec.setAdapter(servicesAdapter);
         mBinding.servicesListRec.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mBinding.servicesListRec.setHasFixedSize(true);
@@ -76,7 +76,7 @@ public class Fragment_ProviderServices extends Fragment implements DatePickerDia
         mBinding.confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cartItem.getCartItem().size() == 0) {
+                if (selectedService.getSelectedServices().size() == 0) {
                     Toast.makeText(getContext(), R.string.cart_is_empty, Toast.LENGTH_SHORT).show();
 
                 } else {
@@ -128,7 +128,7 @@ public class Fragment_ProviderServices extends Fragment implements DatePickerDia
                     Toast.makeText(getContext(), getString(R.string.please_selecte_time), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                HomeMakeupRepo.cartItems.add(cartItem);
+                HomeMakeupRepo.addServicesToCart(selectedService.getSelectedServices());
                 Toast.makeText(getContext(), "Added to Cart ", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -162,9 +162,9 @@ public class Fragment_ProviderServices extends Fragment implements DatePickerDia
         String date = dayOfMonth + "-" + month + "-" + year;
 
         dataText.setText(date);
-        cartItem.setDay(dayOfMonth);
-        cartItem.setMonth(month);
-        cartItem.setYear(year);
+        selectedService.setDay(dayOfMonth);
+        selectedService.setMonth(month);
+        selectedService.setYear(year);
         isDateSelected = true;
     }
 
@@ -172,8 +172,8 @@ public class Fragment_ProviderServices extends Fragment implements DatePickerDia
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String time = hourOfDay + ":" + minute;
         timeText.setText(time);
-        cartItem.setHour(hourOfDay);
-        cartItem.setMinute(minute);
+        selectedService.setHour(hourOfDay);
+        selectedService.setMinute(minute);
         isTimeSelected = true;
     }
 }

@@ -2,9 +2,10 @@ package com.training.apps.makeup.data;
 
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.training.apps.makeup.R;
-import com.training.apps.makeup.model.CartItem;
 import com.training.apps.makeup.model.ChildService;
 import com.training.apps.makeup.model.Client;
 import com.training.apps.makeup.model.MyNotification;
@@ -14,6 +15,7 @@ import com.training.apps.makeup.model.Offer;
 import com.training.apps.makeup.model.PreviousRequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class HomeMakeupRepo {
@@ -27,7 +29,7 @@ public class HomeMakeupRepo {
     public static List<MyService> myServices;
     public static List<String> cities;
     public static List<PreviousRequest> previousRequests;
-    public static List<CartItem> cartItems;
+    public static MutableLiveData<List<ChildService>> cartItems;
 
 
     static {
@@ -62,45 +64,43 @@ public class HomeMakeupRepo {
         myOffers.add(new Offer("offer4", 4, R.drawable.home_makeup_offer4));
 
         myServices = new ArrayList<>();
-        myServices.add(new MyService("All", new ArrayList<>() ));
-
+        myServices.add(new MyService("All", new ArrayList<>()));
 
 
         List<ChildService> henaaChildServices = new ArrayList<>();
-        henaaChildServices.add(new ChildService("Black Henna", 200, "SR", "60 Minute", "Henaa"));
-        henaaChildServices.add(new ChildService("Brown Henna", 250, "SR", "60 Minute", "Henaa"));
-        henaaChildServices.add(new ChildService("Custom Henna", 300, "SR", "60 Minute", "Henaa"));
+        henaaChildServices.add(new ChildService("Black Henna", 200, "SR", "60 Minute", "Henaa", "Hend Ali"));
+        henaaChildServices.add(new ChildService("Brown Henna", 250, "SR", "60 Minute", "Henaa", "Hend Ali"));
+        henaaChildServices.add(new ChildService("Custom Henna", 300, "SR", "60 Minute", "Henaa", "Hend Ali"));
 
         myServices.add(new MyService("Henaa", henaaChildServices));
 
 
         List<ChildService> bodyCareChildServices = new ArrayList<>();
-        bodyCareChildServices.add(new ChildService("Full Body Care", 800, "SR", "3 Hour", "Body Care"));
-        bodyCareChildServices.add(new ChildService("Bride Body Care", 1200, "SR", "4 Hour", "Body Care"));
-        bodyCareChildServices.add(new ChildService("Special Body Care", 1500, "SR", "5 Hour", "Body Care"));
+        bodyCareChildServices.add(new ChildService("Full Body Care", 800, "SR", "3 Hour", "Body Care", "Hend Ali"));
+        bodyCareChildServices.add(new ChildService("Bride Body Care", 1200, "SR", "4 Hour", "Body Care", "Hend Ali"));
+        bodyCareChildServices.add(new ChildService("Special Body Care", 1500, "SR", "5 Hour", "Body Care", "Hend Ali"));
 
         myServices.add(new MyService("Body Care", bodyCareChildServices));
 
 
         List<ChildService> hairCutChildServices = new ArrayList<>();
-        hairCutChildServices.add(new ChildService("Special Hair Cut", 200, "SR", "60 Minute", "Hair Cut"));
-        hairCutChildServices.add(new ChildService("New Hair Cut Style", 250, "SR", "60 Minute", "Hair Cut"));
+        hairCutChildServices.add(new ChildService("Special Hair Cut", 200, "SR", "60 Minute", "Hair Cut", "Hend Ali"));
+        hairCutChildServices.add(new ChildService("New Hair Cut Style", 250, "SR", "60 Minute", "Hair Cut", "Hend Ali"));
 
         myServices.add(new MyService("Hair Cut", hairCutChildServices));
 
 
-
         List<ChildService> makeupChildServices = new ArrayList<>();
-        makeupChildServices.add(new ChildService("Full Makeup", 800, "SR", "60 Minute", "Makeup"));
-        makeupChildServices.add(new ChildService("Bride Makeup", 1000, "SR", "2 Hour", "Makeup"));
+        makeupChildServices.add(new ChildService("Full Makeup", 800, "SR", "60 Minute", "Makeup", "Hend Ali"));
+        makeupChildServices.add(new ChildService("Bride Makeup", 1000, "SR", "2 Hour", "Makeup", "Hend Ali"));
 
         myServices.add(new MyService("Makeup", makeupChildServices));
 
         List<ChildService> manicureChildServices = new ArrayList<>();
-        manicureChildServices.add(new ChildService("Custom Manicure", 100, "SR", "60 Minute", "Manicure"));
-        manicureChildServices.add(new ChildService("Full Manicure", 200, "SR", "60 Minute", "Manicure"));
+        manicureChildServices.add(new ChildService("Custom Manicure", 100, "SR", "60 Minute", "Manicure", "Hend Ali"));
+        manicureChildServices.add(new ChildService("Full Manicure", 200, "SR", "60 Minute", "Manicure", "Hend Ali"));
 
-        myServices.add(new MyService("Manicure",manicureChildServices ));
+        myServices.add(new MyService("Manicure", manicureChildServices));
 
 
         myNotifications = new ArrayList<>();
@@ -176,13 +176,26 @@ public class HomeMakeupRepo {
                 "8:00PM - 10:00PM",
                 600,
                 "SR"));
-
-        cartItems = new ArrayList<>();
+        cartItems = new MutableLiveData<>();
     }
 
 
     public static void editClientInfo(Client newClient) {
         theClient = newClient;
+    }
+
+    public static void addServicesToCart(HashMap<String, ChildService> selectedServices) {
+        List<ChildService> childServices = new ArrayList<>(selectedServices.values());
+
+        List<ChildService> alreadyAddedItems = cartItems.getValue();
+
+        if (alreadyAddedItems != null) {
+            alreadyAddedItems.addAll(childServices);
+
+        } else {
+            alreadyAddedItems = new ArrayList<>(childServices);
+        }
+        cartItems.setValue(alreadyAddedItems);
     }
 
 }

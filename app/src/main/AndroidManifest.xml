@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.clientProvider.ProviderPageActivity"></activity>
-        <activity android:name=".ui.main.clientProfile.EditProfileActivity" >
+        <activity android:name=".ui.main.cart.CartActivity"></activity>
+        <activity android:name=".ui.main.clientProvider.ProviderPageActivity" />
+        <activity android:name=".ui.main.clientProfile.EditProfileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.training.apps.makeup.ui.main.clientProfile.PersonalPageActivity" />
@@ -35,38 +36,32 @@
 
         <activity
             android:name=".ui.signUpAndLogin.StartingActivity"
-
             android:configChanges="orientation|screenSize|layoutDirection"
-            android:launchMode="singleTop"></activity>
-
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.main.MainActivity"
             android:configChanges="orientation|screenSize|layoutDirection"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.map.MapActivity"
             android:label="Map" />
-
-        <activity android:name=".ui.main.clientProfile.PersonalPageActivity" >
+        <activity android:name=".ui.main.clientProfile.PersonalPageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.training.apps.makeup.ui.main.MainActivity" />
         </activity>
-
-        <activity android:name=".ui.main.clientNotifaication.NotificationActivity" >
+        <activity android:name=".ui.main.clientNotifaication.NotificationActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.training.apps.makeup.ui.main.MainActivity" />
         </activity>
-        <activity android:name=".ui.main.clientRequests.RequestsActivity" >
+        <activity android:name=".ui.main.clientRequests.RequestsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.training.apps.makeup.ui.main.MainActivity" />
         </activity>
         <activity android:name=".ui.main.termsAndCondition.TermsAndConditionActivity" />
-
     </application>
 
 </manifest>

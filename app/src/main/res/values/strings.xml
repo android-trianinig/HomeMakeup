@@ -76,4 +76,6 @@
     <string name="select_time">Select Time</string>
     <string name="please_selecte_date">Please Select Date!</string>
     <string name="please_selecte_time">Please Select Time!</string>
+    <string name="next">Next</string>
+    <string name="cart">Cart</string>
 </resources>

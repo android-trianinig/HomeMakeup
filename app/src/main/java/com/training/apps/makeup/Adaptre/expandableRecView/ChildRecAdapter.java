@@ -12,7 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.training.apps.makeup.R;
-import com.training.apps.makeup.model.CartItem;
+import com.training.apps.makeup.model.SelectedService;
 import com.training.apps.makeup.model.ChildService;
 
 import java.util.List;
@@ -21,12 +21,12 @@ public class ChildRecAdapter extends RecyclerView.Adapter<ChildRecAdapter.ChildV
 
     private List<ChildService> childServices;
     private Context mContext;
-    private CartItem cartItem;
+    private SelectedService selectedService;
 
-    public ChildRecAdapter(Context context, List<ChildService> childServices, CartItem cartItem) {
+    public ChildRecAdapter(Context context, List<ChildService> childServices, SelectedService selectedService) {
         this.childServices = childServices;
         this.mContext = context;
-        this.cartItem = cartItem;
+        this.selectedService = selectedService;
     }
 
     @NonNull
@@ -98,9 +98,9 @@ public class ChildRecAdapter extends RecyclerView.Adapter<ChildRecAdapter.ChildV
                 } else {
                     childService.setChecked(true);
 
-                    cartItem.addItem(childService.getParent(), childService);
-                    System.out.println(cartItem.getCartItem().size());
-                    for (ChildService ch : cartItem.getCartItem().values()
+                    selectedService.addItem(childService.getParent(), childService);
+                    System.out.println(selectedService.getSelectedServices().size());
+                    for (ChildService ch : selectedService.getSelectedServices().values()
                     ) {
                         System.out.println(ch.getChildServiceTitle());
                     }

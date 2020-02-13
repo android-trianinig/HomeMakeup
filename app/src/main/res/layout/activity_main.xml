@@ -40,8 +40,6 @@
 
         </LinearLayout>
 
-        <!--    app:menu="@menu/drawer_main">-->
-        <!--    app:theme="@style/NavigationDrawerYellowSelected"-->
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"

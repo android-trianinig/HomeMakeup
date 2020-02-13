@@ -1,7 +1,5 @@
 package com.training.apps.makeup.model;
 
-import android.os.Parcelable;
-
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
@@ -9,9 +7,9 @@ import com.training.apps.makeup.BR;
 
 import java.util.HashMap;
 
-public class CartItem extends BaseObservable {
+public class SelectedService extends BaseObservable {
 
-    private HashMap<String, ChildService> cartItem = new HashMap<>();
+    private HashMap<String, ChildService> selectedService = new HashMap<>();
     private int totalItemsCost;
     private int year;
     private int month;
@@ -22,24 +20,24 @@ public class CartItem extends BaseObservable {
 
 
     @Bindable
-    public HashMap<String, ChildService> getCartItem() {
-        return cartItem;
+    public HashMap<String, ChildService> getSelectedServices() {
+        return selectedService;
     }
 
-    public void setCartItem(HashMap<String, ChildService> cartItem) {
-        this.cartItem = cartItem;
-        notifyPropertyChanged(BR.cartItem);
+    public void setSelectedServices(HashMap<String, ChildService> selectedService) {
+        this.selectedService = selectedService;
+        notifyPropertyChanged(BR.selectedService);
     }
 
     public void addItem(String parent, ChildService childService) {
-        cartItem.put(parent, childService);
-        notifyPropertyChanged(BR.cartItem);
+        selectedService.put(parent, childService);
+        notifyPropertyChanged(BR.selectedService);
         updateCost();
     }
 
     public void updateCost() {
         int newTotalCost = 0;
-        for (ChildService childService : cartItem.values()) {
+        for (ChildService childService : selectedService.values()) {
             newTotalCost += childService.getChildServiceCost();
         }
         setTotalItemsCost(newTotalCost);

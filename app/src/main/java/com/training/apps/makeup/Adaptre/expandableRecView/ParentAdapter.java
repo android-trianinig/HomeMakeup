@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.training.apps.makeup.R;
-import com.training.apps.makeup.model.CartItem;
+import com.training.apps.makeup.model.SelectedService;
 import com.training.apps.makeup.model.MyService;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -25,12 +25,12 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ParentView
 
     private Context mContext;
     private List<MyService> myServices;
-    private CartItem cartItem;
+    private SelectedService selectedService;
 
-    public ParentAdapter(Context context, List<MyService> myServices, CartItem cartItem) {
+    public ParentAdapter(Context context, List<MyService> myServices, SelectedService selectedService) {
         this.mContext = context;
         this.myServices = myServices;
-        this.cartItem = cartItem;
+        this.selectedService = selectedService;
     }
 
     @NonNull
@@ -45,7 +45,7 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ParentView
         MyService myService = myServices.get(position);
         holder.parentText.setText(myService.getServiceName());
 
-        holder.childRec.setAdapter(new ChildRecAdapter(mContext, myService.getChildServices(), cartItem));
+        holder.childRec.setAdapter(new ChildRecAdapter(mContext, myService.getChildServices(), selectedService));
         holder.childRec.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         holder.childRec.setHasFixedSize(true);
     }
