@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ import java.util.List;
  */
 public class Fragment_ProviderServices extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
+    private static final String TAG = "Fragment_ProviderServic";
     public FragmentProviderServicesBinding mBinding;
     private List<MyService> myServiceList;
     public SelectedService selectedService;
@@ -56,8 +58,8 @@ public class Fragment_ProviderServices extends Fragment implements DatePickerDia
         this.myServiceList = myServices;
     }
 
-    public static Fragment_ProviderServices getInstance() {
-        return new Fragment_ProviderServices();
+    public static Fragment_ProviderServices getInstance(List<MyService> myServices) {
+        return new Fragment_ProviderServices(myServices);
     }
 
 
@@ -69,6 +71,7 @@ public class Fragment_ProviderServices extends Fragment implements DatePickerDia
         selectedService = new SelectedService();
         mBinding.setSelectedService(selectedService);
         ParentAdapter servicesAdapter = new ParentAdapter(getContext(), myServiceList, selectedService);
+        //Log.e(TAG, "onCreateView: " + myServiceList.size());
         mBinding.servicesListRec.setAdapter(servicesAdapter);
         mBinding.servicesListRec.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mBinding.servicesListRec.setHasFixedSize(true);

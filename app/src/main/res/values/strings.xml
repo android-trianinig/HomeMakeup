@@ -81,4 +81,7 @@
     <string name="set_date_and_time">Set date and time</string>
     <string name="your_cart_is_empty">Your cart is empty</string>
     <string name="add_something_to_make_me_happy">Add something to make me happy :)</string>
+    <string name="let_s_go">Let\'s go!</string>
+    <string name="didn_t_get_the_otp_resend_otp">Didn\'t get the OTP? RESEND OTP.</string>
+    <string name="enter_the_6_digit_code">Enter the 6 digit Code</string>
 </resources>

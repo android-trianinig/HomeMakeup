@@ -13,44 +13,63 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.training.apps.makeup.R;
-import com.training.apps.makeup.databinding.ActivityStatingBinding;
+import com.training.apps.makeup.databinding.ActivityStartingBinding;
 import com.training.apps.makeup.model.Client;
 import com.training.apps.makeup.model.MyProvider;
-import com.training.apps.makeup.ui.map.MapActivity;
 import com.training.apps.makeup.ui.main.MainActivity;
+import com.training.apps.makeup.ui.map.MapActivity;
 import com.training.apps.makeup.ui.signUpAndLogin.signUp.FragmentClientSignUp;
 import com.training.apps.makeup.ui.signUpAndLogin.signUp.FragmentProviderSignUp;
 import com.training.apps.makeup.ui.signUpAndLogin.signUp.FragmentSignUp;
+import com.training.apps.makeup.ui.signUpAndLogin.signUp.Fragment_VerifyPhone;
 
 public class StartingActivity extends AppCompatActivity implements IStartingActivityClickHandler {
     private static final String TAG = "StartingActivity";
 
     private FragmentManager fragmentManager;
     private FragmentSignIn fragmentSignIn;
-
     private FragmentSignUp fragment_sign_up;
+    Fragment_VerifyPhone fragment_verifyPhone;
     private int fragment_count = 0;
-    private ActivityStatingBinding mBinding;
+    private ActivityStartingBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_stating);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_starting);
 
         fragmentManager = getSupportFragmentManager();
         if (savedInstanceState == null) {
-            DisplayFragmentSignIn();
+            displayFragmentSignIn();
         }
     }
 
-    public void DisplayFragmentSignIn() {
+    public void displayFragmentSignIn() {
         fragment_count += 1;
         fragmentSignIn = FragmentSignIn.newInstance();
         if (fragmentSignIn.isAdded()) {
             fragmentManager.beginTransaction().show(fragmentSignIn).commit();
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragmentSignIn, "fragmentSignIn").addToBackStack("fragmentSignIn").commit();
+        }
+    }
+
+    public void displayFragmentVerifyPhoneNumber(String phoneNumber) {
+        fragment_count += 1;
+        fragment_verifyPhone = Fragment_VerifyPhone.newInstance(phoneNumber);
+        if (fragment_verifyPhone.isAdded()) {
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                    .show(fragment_verifyPhone)
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                    .add(R.id.fragment_container, fragment_verifyPhone, "fragmentVerifyPhoneNumber")
+                    .addToBackStack("fragmentVerifyPhoneNumber")
+                    .commit();
         }
     }
 
@@ -109,10 +128,18 @@ public class StartingActivity extends AppCompatActivity implements IStartingActi
 
     @Override
     public void onNewClientSignUpClickHandler(Client client) {
-        Toast.makeText(this,
-                "name: " + client.getClientName() + ", password: " + client.getClientPassword() + " " + client.getClientCity(),
-                Toast.LENGTH_SHORT)
-                .show();
+//        Toast.makeText(this,
+//                "name: " + client.getClientName() + ", password: " + client.getClientPassword() + " " + client.getClientCity(),
+//                Toast.LENGTH_SHORT)
+//                .show();
+
+
+        String phoneClientNumber = client.getClientPhoneNumber();
+        if (phoneClientNumber == null || phoneClientNumber.isEmpty() || phoneClientNumber.length() < 11) {
+            Toast.makeText(this, "Please enter valid phone number !", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        displayFragmentVerifyPhoneNumber(phoneClientNumber);
     }
 
     @Override
@@ -167,7 +194,6 @@ public class StartingActivity extends AppCompatActivity implements IStartingActi
             } else if (requestCode == FragmentProviderSignUp.PICK_IMAGE) {
                 if (resultCode == RESULT_OK) {
                     if (data != null) {
-//
                         Uri selectedImage = data.getData();
 
                         fVSignUp.mBinding.txtAddPhoto.setVisibility(View.GONE);
@@ -220,5 +246,23 @@ public class StartingActivity extends AppCompatActivity implements IStartingActi
                         " " + myProvider.getProviderLocation(),
                 Toast.LENGTH_SHORT)
                 .show();
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            startHomeActivity();
+        }
+
+    }
+
+
+    private void startHomeActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

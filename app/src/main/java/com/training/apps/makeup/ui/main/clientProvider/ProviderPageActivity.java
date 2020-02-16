@@ -2,6 +2,7 @@ package com.training.apps.makeup.ui.main.clientProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ public class ProviderPageActivity extends AppCompatActivity {
     public ActivityProviderPageBinding mBinding;
     public List<Fragment> fragmentList;
     public List<String> titleList;
+    MyFragmentPageAdapter adapter;
     public List<MyService> myServiceList;
     private Menu menu;
 
@@ -37,22 +39,23 @@ public class ProviderPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_provider_page);
 
         Intent intent = getIntent();
         if (intent != null) {
             providerName = intent.getStringExtra("provider_name");
         }
-
-        myServiceList = HomeMakeupRepo.myServices;
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_provider_page);
-
         setSupportActionBar(mBinding.providerToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(providerName);
 
+        myServiceList = HomeMakeupRepo.myServices;
+
+
+
         initFragments();
 
-        MyFragmentPageAdapter adapter = new MyFragmentPageAdapter(getSupportFragmentManager());
+        adapter = new MyFragmentPageAdapter(getSupportFragmentManager());
         adapter.addFragments(fragmentList);
         adapter.addTitles(titleList);
 
@@ -71,7 +74,7 @@ public class ProviderPageActivity extends AppCompatActivity {
 
     private void initFragments() {
         fragmentList = new ArrayList<>();
-        fragmentList.add(new Fragment_ProviderServices(myServiceList));
+        fragmentList.add(Fragment_ProviderServices.getInstance(myServiceList));
         fragmentList.add(Fragment_ProviderLocation.getInstance());
         fragmentList.add(Fragment_ProviderRates.getInstance());
 
@@ -109,4 +112,5 @@ public class ProviderPageActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

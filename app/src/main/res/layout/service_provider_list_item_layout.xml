@@ -78,6 +78,7 @@
                 app:layout_constraintVertical_bias="0.0"
                 app:srb_borderColor="@color/yellow"
                 app:srb_fillColor="@color/yellow"
+                app:srb_isIndicator="true"
                 app:srb_numberOfStars="5"
                 app:srb_rating="3"
                 app:srb_starSize="20dp"
