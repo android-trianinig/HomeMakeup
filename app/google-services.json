@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "835473989136",
+    "firebase_url": "https://home-makeup-f3bee.firebaseio.com",
+    "project_id": "home-makeup-f3bee",
+    "storage_bucket": "home-makeup-f3bee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835473989136:android:1e14d418223ffcde44b495",
+        "android_client_info": {
+          "package_name": "com.training.apps.makeup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "835473989136-9iovs8239jhdmt21bacd54esmaq0uin3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.training.apps.makeup",
+            "certificate_hash": "bc16a46041ea90a09f7ebe6d54445643d312aa02"
+          }
+        },
+        {
+          "client_id": "835473989136-bn34ma717tlchefuf4jcqt2ur1caic0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfODFY1SEeXp8xOtWnziESyd5P7rE_Rv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835473989136-bn34ma717tlchefuf4jcqt2ur1caic0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
